@@ -6,7 +6,7 @@ class Solution{
     public:
     int maxLen(vector<int>&A, int n)
     {   
-        int ans=0;
+        /* int ans=0;
         for(int i=0;i<n;i++){
             int sum = A[i];
             int t = 0;
@@ -18,7 +18,28 @@ class Solution{
             if(ans<t)
                 ans = t;
         }
-        return ans;
+        return ans; */
+
+        int maxLen =0;
+        int sum = 0;
+        unordered_map<int ,int> map;
+        for(int index =0;index<n;index++){
+            sum += A[index];
+
+            if(A[index] == 0 && maxLen == 0){
+                maxLen = 1;
+            }
+            if(sum==0){
+                maxLen = index+1;
+            }
+
+            if(map.find(sum) == map.end()){
+                map[sum] = index;
+            } else {
+                maxLen = max(maxLen,index-map[sum]);
+            }
+        }
+        return maxLen;
     }
 };
 

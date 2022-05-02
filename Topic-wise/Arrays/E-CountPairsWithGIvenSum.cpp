@@ -8,14 +8,18 @@ public:
     int getPairsCount(int arr[], int n, int k) {
         // code here
         int ans =0;
+        unordered_map<int,int> mp;
         for(int i=0;i<n;i++){
-            for(int j=i+1;j<n;j++){
-                if(k == arr[i]+arr[j]){
-                    ans++;
-                }
+            mp[arr[i]]++;
+        }
+        for(int i=0;i<n;i++){
+            ans += mp[k - arr[i]];
+
+            if(k - arr[i] == arr[i]){
+                ans--;
             }
         }
-        return ans;
+        return ans/2;
     }
 };
 
